@@ -22,6 +22,11 @@ int main()
 
 		MATCHING_C::instance().Matching();
 
+		IPDATA ip;
+		int host = 0;
+		if (MATCHING_C::instance().GetNetDATA(&ip, &host) != -1)
+			printfDx("ip:%d.%d.%d.%d,host%d\n", ip.d1, ip.d2, ip.d3, ip.d4, host);
+
 		ScreenFlip();
 	}
 

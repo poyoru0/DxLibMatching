@@ -13,6 +13,7 @@ private:
 		IPDATA partnerIp;
 		bool conected;
 		int handle;
+		int host;
 	}*p;
 
 public:
@@ -20,7 +21,9 @@ public:
 	void EndMatching();
 
 	int Matching();
-	int GetNetDATA(IPDATA* partnerIP);
+	void SetHost(IPDATA ip);
+	void NetReady(IPDATA ip);
+	int GetNetDATA(IPDATA* partnerIP, int* host);
 
 	static MATCHING_C& instance();
 };
