@@ -17,6 +17,10 @@ int main()
 		//escでメインループを抜ける
 		if (CheckHitKey(KEY_INPUT_ESCAPE))break;
 
+		//相手が切断されていれば終了
+		if (MATCHING_C::instance().DisConnected(true))
+			break;
+
 		ClearDrawScreen();
 		clsDx();
 
@@ -24,7 +28,8 @@ int main()
 
 		IPDATA ip;
 		int host = 0;
-		if (MATCHING_C::instance().GetNetDATA(&ip, &host) != -1)
+		int handle;
+		if (MATCHING_C::instance().GetNetDATA(&ip, &host, &handle) != -1)
 			printfDx("ip:%d.%d.%d.%d,host%d\n", ip.d1, ip.d2, ip.d3, ip.d4, host);
 
 		ScreenFlip();

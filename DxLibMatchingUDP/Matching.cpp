@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "Matching.h"
 #include <cstdio>
+#include <time.h>
 
 /// <summary>
 /// Matching初期化
@@ -18,6 +19,7 @@ int MATCHING_C::InitMatching()
 	//初期化
 	p->conected = false;
 	p->host = false;
+	p->disConnectLastTime = clock();;
 
 	return 0;
 }
@@ -139,27 +141,8 @@ void MATCHING_C::SetHost(IPDATA ip)
 				p->host = true;
 			else
 				p->host = false;
-			
-			printf("SetHost:%d\n", p->host);
-		}
-	}
-}
 
-/// <summary>
-/// 相手がreadyを送ってくるまで待つ
-/// </summary>
-void MATCHING_C::NetReady(IPDATA ip)
-{
-	char str[256] = "";
-	NetWorkSendUDP(p->handle, ip, PORT, "ready", 6);
-	while (1)
-	{
-		if (CheckNetWorkRecvUDP(p->handle) == true)
-		{
-			NetWorkRecvUDP(p->handle, nullptr, nullptr, str, sizeof(str), false);
-			printf("readyTest:%s\n", str);
-			if (strcmp(str, "ready") == 0)
-				return;
+			printf("SetHost:%d\n", p->host);
 		}
 	}
 }
@@ -169,13 +152,47 @@ void MATCHING_C::NetReady(IPDATA ip)
 /// </summary>
 /// <param name="partnerIP">接続相手のIPアドレス</param>
 /// <returns>接続していなかったら-1を返す</returns>
-int MATCHING_C::GetNetDATA(IPDATA* partnerIP, int* host)
+int MATCHING_C::GetNetDATA(IPDATA* partnerIP, int* host, int* handle)
 {
 	if (p->conected == false)
 		return -1;
 
 	*partnerIP = p->partnerIp;
 	*host = p->host;
+	*handle = p->handle;
+	return 0;
+}
+
+/// <summary>
+/// どちらかの接続が切れたら１を返す
+/// </summary>
+int MATCHING_C::DisConnected(bool flag)
+{
+	//接続しているときのみ実行
+	if (p->conected == true)
+	{
+		if (flag == true)//送り続ける
+			NetWorkSendUDP(p->handle, p->partnerIp, PORT, "", 1);
+		//受信があったら実行
+		if (CheckNetWorkRecvUDP(p->handle) == true)
+		{
+			if (flag == true)//受信し続ける
+			{
+				char str[256];
+				NetWorkRecvUDP(p->handle, NULL, NULL, str, sizeof(str), false);
+			}
+			p->disConnectLastTime = clock();
+		}
+		//前回の受信から５秒以上たっていたら切断判定とする
+		if (5.0f < (clock() - p->disConnectLastTime) / 1000.0f)
+		{
+			printf("相手との接続が切れました");
+			return 1;
+		}
+	}
+	else
+		p->disConnectLastTime = clock();
+
 	return 0;
 }
 
