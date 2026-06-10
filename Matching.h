@@ -14,6 +14,8 @@ private:
 		bool conected;
 		int handle;
 		int host;
+
+		float disConnectLastTime;
 	}*p;
 
 public:
@@ -22,8 +24,8 @@ public:
 
 	int Matching();
 	void SetHost(IPDATA ip);
-	void NetReady(IPDATA ip);
 	int GetNetDATA(IPDATA* partnerIP, int* host, int* handle);
+	int DisConnected(bool flag);
 
 	static MATCHING_C& instance();
 };
