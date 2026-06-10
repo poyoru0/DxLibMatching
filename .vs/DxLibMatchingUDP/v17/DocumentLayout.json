@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\cre\\Documents\\GitHub\\DxLibMatching\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0638A721-B03E-40B1-838B-AF21635A1AF9}|DxLibMatchingUDP\\DxLibMatchingUDP.vcxproj|C:\\Users\\cre\\Documents\\GitHub\\DxLibMatching\\DxLibMatchingUDP\\Matching.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{0638A721-B03E-40B1-838B-AF21635A1AF9}|DxLibMatchingUDP\\DxLibMatchingUDP.vcxproj|solutionrelative:DxLibMatchingUDP\\Matching.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Matching.cpp",
+              "DocumentMoniker": "C:\\Users\\cre\\Documents\\GitHub\\DxLibMatching\\DxLibMatchingUDP\\Matching.cpp",
+              "RelativeDocumentMoniker": "DxLibMatchingUDP\\Matching.cpp",
+              "ToolTip": "C:\\Users\\cre\\Documents\\GitHub\\DxLibMatching\\DxLibMatchingUDP\\Matching.cpp",
+              "RelativeToolTip": "DxLibMatchingUDP\\Matching.cpp",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAAANAAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-10T02:26:37.875Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -18,7 +18,7 @@ int MATCHING_C::InitMatching()
 	//‰Šú‰»
 	p->conected = false;
 	p->host = false;
-	p->disConnectLastTime = clock();
+	p->disConnectLastTime = -1;
 
 	return 0;
 }
@@ -186,13 +186,16 @@ int MATCHING_C::GetNetDATA(IPDATA* partnerIP, int* host, int* handle)
 /// </summary>
 int MATCHING_C::DisConnected(bool flag)
 {
-	float nowT = clock();//Œ»ÝŽž‚ÌŽæ“¾
 	//Ú‘±‚µ‚Ä‚¢‚é‚Æ‚«‚Ì‚ÝŽÀs
 	if (p->conected == true)
 	{
+		float nowT = clock();//Œ»ÝŽž‚ÌŽæ“¾
+		if (p->disConnectLastTime == -1)
+			p->disConnectLastTime = nowT;
+
 		if (flag == true)//‘—‚è‘±‚¯‚é
 			NetWorkSendUDP(p->handle, p->partnerIp, PORT, "", 1);
-		
+
 		//ŽóM‚ª‚ ‚Á‚½‚çŽÀs
 		if (CheckNetWorkRecvUDP(p->handle) == true)
 		{
@@ -210,8 +213,6 @@ int MATCHING_C::DisConnected(bool flag)
 			return 1;
 		}
 	}
-	else
-		p->disConnectLastTime = nowT;
 
 	return 0;
 }
