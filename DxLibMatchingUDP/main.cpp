@@ -15,7 +15,8 @@ int main()
 	while (ProcessMessage() == 0)
 	{
 		//escでメインループを抜ける
-		if (CheckHitKey(KEY_INPUT_ESCAPE))break;
+		if (CheckHitKey(KEY_INPUT_ESCAPE))
+			break;
 
 		//相手が切断されていれば終了
 		if (MATCHING_C::instance().DisConnected(true))

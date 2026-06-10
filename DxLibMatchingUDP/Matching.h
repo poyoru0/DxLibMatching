@@ -15,16 +15,18 @@ private:
 		int handle;
 		int host;
 
-		int disConnectLastTime;
+		float disConnectLastTime;
 	}*p;
+
+	void SetHost(IPDATA ip);
 
 public:
 	int InitMatching();
 	void EndMatching();
 
 	int Matching();
-	void SetHost(IPDATA ip);
 	int GetNetDATA(IPDATA* partnerIP, int* host, int* handle);
+
 	int DisConnected(bool flag);
 
 	static MATCHING_C& instance();
